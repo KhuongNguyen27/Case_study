@@ -8,7 +8,10 @@
 </head>
 <body>
     <?php
-                $sql = "SELECT * FROM home";
+                $records_per_page = 5;
+                $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
+                $offset = ($current_page - 1) * $records_per_page;
+                $sql = "SELECT * FROM home LIMIT $records_per_page OFFSET $offset";
                 $mysql = $conn->query($sql);
                 $mysql->setFetchMode( PDO :: FETCH_ASSOC);
                 $rows = $mysql->fetchAll();
@@ -34,16 +37,23 @@
                     </tr>
                     <?php endforeach; ?>
                 </table>
-                <form style = 'margin-left:15px;' action='insert_home.php' method = 'POST'>
-                <div class="row g-3 align-items-center">
-                    <div class="col-auto">
-                        <label  class="col-form-label">Insert new record</label>
-                    </div>
-                    <div class="col-auto">
-                        <button class="btn btn-primary" type="submit">Submit</button>
-                    </div>
-                <div>
-                </form>  
+                <?php
+                    $sql_count = "SELECT COUNT(*) as total FROM home";
+                    $stmt_count = $conn->query($sql_count);
+                    $stmt_count->setFetchMode(PDO::FETCH_ASSOC);
+                    $row_count = $stmt_count->fetch();
+                    $total_records = $row_count['total'];
+                    $total_pages = ceil($total_records / $records_per_page);
+                ?>
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                        <?php for ($i=1; $i<=$total_pages; $i++) { ?>
+                            <li class="page-item <?php if ($i==$current_page) echo 'active'; ?>">
+                                <a class="page-link" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                            </li>
+                        <?php } ?>
+                    </ul>
+                </nav> 
             </div>
         
 </body>

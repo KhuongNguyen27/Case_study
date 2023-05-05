@@ -8,13 +8,14 @@
     $date_of_start = $_GET['date_of_start'];
     $slary = $_GET['slary'];
     $sql = "INSERT INTO staff (name_staff,date_of_birth,date_of_start,slary) VALUES ('$name_staff','$date_of_birth','$date_of_start','$slary')";
-    if ($conn->query($sql) !== FALSE) {
+    try {
+        $conn->query($sql);
         $sql = "INSERT INTO staff (name_staff,date_of_birth,date_of_start,slary) VALUES ($name_staff,$date_of_birth,$date_of_start,$slary)";
         $Time = date('Y-m-d H:i:s');
         $home = "INSERT INTO home(TableChange,Record,Time) VALUES('staff','$sql','$Time')";
         $mysql = $conn->query($home);
         header("Location: staff.php");
-    } else {
+    }catch(Exception $e) {
         echo "Error: <br>" . $sql . "<br>Please contact admin to fix problem";
 }
 }

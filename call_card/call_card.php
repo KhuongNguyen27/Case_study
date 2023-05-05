@@ -37,7 +37,7 @@
                 <!-- End of Topbar -->
                 <!-- Begin Page Content -->
                 <?php
-                $sql = "SELECT * FROM call_card";
+                $sql = "SELECT * FROM call_card LEFT JOIN books ON books.ID = call_card.name_book_id LEFT JOIN user ON call_card.user_id= user.ID LEFT JOIN staff ON call_card.staff_id = staff.ID";
                 $mysql = $conn->query($sql);
                 $mysql->setFetchMode( PDO :: FETCH_ASSOC);
                 $rows = $mysql->fetchAll();
@@ -45,20 +45,20 @@
                 <table  class ='table table-striped table-hover'>
                     <tr>
                         <th>ID</th>
-                        <th>name_book_id</th>
-                        <th>user_id</th>
-                        <th>staff_id</th>
-                        <th>date_borrow</th>
-                        <th>date_return</th>
+                        <th>name book</th>
+                        <th>user</th>
+                        <th>staff</th>
+                        <th>date borrow</th>
+                        <th>date return</th>
                         <th></th>
                         <th></th>
                     <tr>
                     <?php foreach ($rows as $r) : ?>
                     <tr>
                         <td><?php echo $r['ID']; ?></td>
-                        <td><?php echo $r['name_book_id']; ?></td>
-                        <td><?php echo $r['user_id']; ?></td>
-                        <td><?php echo $r['staff_id']; ?></td>
+                        <td><?php echo $r['name_book']; ?></td>
+                        <td><?php echo $r['user']; ?></td>
+                        <td><?php echo $r['name_staff']; ?></td>
                         <td><?php echo $r['date_borrow']; ?></td>
                         <td><?php echo $r['date_return']; ?></td>
                         <td>

@@ -16,13 +16,14 @@
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $category= $_POST['category'];
     $sql = "UPDATE categories SET category_book = '$category' WHERE ID = $id ";
-    if ($conn->query($sql) !== FALSE) {
+    try { 
+        $conn->query($sql);
         $sql = "UPDATE categories SET category_book = $category WHERE ID = $id ";
         $Time = date('Y-m-d H:i:s');
         $home = "INSERT INTO home(TableChange,Record,Time) VALUES('categories','$sql','$Time')";
         $mysql = $conn->query($home);
         header("Location: category_book.php");
-    } else {
+    }catch(Exception $e) {
         echo "Error: <br>" . $sql . "<br>Please contact admin to fix problem";
 }
 }

@@ -10,13 +10,14 @@
     $sql = "INSERT INTO user (user,date_of_birth,address,CCCD) VALUES ('$user','$date_of_birth','$address','$CCCD')";
 
     
-    if ($conn->query($sql) !== FALSE) {
+    try {
+        $conn->query($sql);
         $sql = "INSERT INTO user (user,date_of_birth,address,CCCD) VALUES ($user, $date_of_birth, $address ,$CCCD)";
         $Time = date('Y-m-d H:i:s');
         $home = "INSERT INTO home(TableChange,Record,Time) VALUES('user','$sql','$Time')";
         $mysql = $conn->query($home);
         header("Location: user.php");
-    } else {
+    }catch(Exception $e) {
         echo "Error: <br>" . $sql . "<br>Please contact admin to fix problem";
 }
 }

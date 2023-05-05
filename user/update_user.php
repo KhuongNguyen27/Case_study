@@ -22,13 +22,14 @@
         $sql = "UPDATE user SET user = '$user', date_of_birth = '$date_of_birth', address = '$address', CCCD = '$CCCD' WHERE ID = $id ";
         
         
-        if ($conn->query($sql) !== FALSE) {
+        try {
+            $conn->query($sql);
             $sql = "UPDATE user SET user = $user, date_of_birth = $date_of_birth, address = $address, CCCD = $CCCD WHERE ID = $id ";
             $Time = date('Y-m-d H:i:s');
             $home = "INSERT INTO home(TableChange,Record,Time) VALUES('$file','$sql','$Time')";
             $mysql = $conn->query($home);
             header("Location: user.php");
-        } else {
+        }catch(Exception $e) {
             echo "Error: <br>" . $sql . "<br>Please contact admin to fix problem";
 }
 }

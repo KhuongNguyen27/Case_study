@@ -12,13 +12,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $amount = $_GET['amount'];
     $price = $_GET['price'];
     $sql = "INSERT INTO books (name_book,category_id,author,publication_date,amount,price) VALUES ('$name_book','$category_id','$author','$publication_date','$amount','$price')";
-    if ($conn->query($sql) !== FALSE) {
+    try{
+        $conn->query($sql);
         $sql = "INSERT INTO books (name_book,category_id,author,publication_date,amount,price) VALUES ($name_book,$category_id,$author,$publication_date,$amount,$price)";
         $Time = date('Y-m-d H:i:s');
         $home = "INSERT INTO home(TableChange,Record,Time) VALUES('call_card','$sql','$Time')";
         $mysql = $conn->query($home);
         header("Location: books.php");
-    } else {
+    } catch(Exception $e) {
         echo "Error: <br>" . $sql . "<br>Please contact admin to fix problem";
 }
 }

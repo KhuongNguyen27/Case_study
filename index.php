@@ -10,8 +10,8 @@
                 include_once 'table.php';
                 ?>
             </div>
-            <?php include_once 'include/footer.php'?>
         </div>
+        <?php include_once 'include/footer.php'?>
     </div>
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>

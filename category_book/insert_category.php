@@ -7,13 +7,14 @@
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $category = $_GET['category'];
     $sql = "INSERT INTO categories (category_book) VALUES ('$category')";
-    if ($conn->query($sql) !== FALSE) {
+    try {
+        $conn->query($sql);
         $sql = "INSERT INTO categories (category_book) VALUES ($category)";
         $Time = date('Y-m-d H:i:s');
         $home = "INSERT INTO home(TableChange,Record,Time) VALUES('categories','$sql','$Time')";
         $mysql = $conn->query($home);
         header("Location: category_book.php");
-    } else {
+    }catch(Exception $e){
         echo "Error: <br>" . $sql . "<br>Please contact admin to fix problem";
 }
 }

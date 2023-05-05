@@ -16,13 +16,14 @@
         $amount = $_POST['amount'];
         $price = $_POST['price'];
         $sql = "UPDATE books SET name_book = '$name_book', category_id = '$category_id', author = '$author', publication_date = '$publication_date', amount = '$amount', price = '$price' WHERE ID = $id ";
-        if ($conn->query($sql) !== FALSE) {
+        try{ 
+            $conn->query($sql);
             $sql = "UPDATE books SET name_book = $name_book, category_id = $category_id, author = $author, publication_date = $publication_date, amount = $amount, price = $price WHERE ID = $id ";
             $Time = date('Y-m-d H:i:s');
             $home = "INSERT INTO home(TableChange,Record,Time) VALUES('call_card','$sql','$Time')";
             $mysql = $conn->query($home);
             header("Location: books.php");
-        } else {
+        } catch(Exception $e) {
             echo "Error: <br>" . $sql . "<br>Please contact admin to fix problem";
 }
 }
