@@ -3,6 +3,7 @@
     include_once '../db.php';
     global $conn;
     $id = $_GET['Id'];
+    $file = $_GET['file'];
     // Câu truy vấn lấy dữ liệu
     $sql = "SELECT * FROM user WHERE ID = '$id'";
     // $mysql là đối tượng PDO chứa kết quả truy vấn trả về sau khi thực hiện (query) cây truy vấn
@@ -19,7 +20,13 @@
         $address = $_POST['address'];
         $CCCD = $_POST['CCCD'];
         $sql = "UPDATE user SET user = '$user', date_of_birth = '$date_of_birth', address = '$address', CCCD = '$CCCD' WHERE ID = $id ";
+        
+        
         if ($conn->query($sql) !== FALSE) {
+            $sql = "UPDATE user SET user = $user, date_of_birth = $date_of_birth, address = $address, CCCD = $CCCD WHERE ID = $id ";
+            $Time = date('Y-m-d H:i:s');
+            $home = "INSERT INTO home(TableChange,Record,Time) VALUES('$file','$sql','$Time')";
+            $mysql = $conn->query($home);
             header("Location: user.php");
         } else {
             echo "Error: <br>" . $sql . "<br>Please contact admin to fix problem";

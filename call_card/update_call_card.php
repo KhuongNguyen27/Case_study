@@ -21,7 +21,11 @@
         $date_return = $_POST['date_return'];
     $sql = "UPDATE call_card SET name_book_id = '$name_book_id', user_id = '$user_id', staff_id = '$staff_id', date_borrow = '$date_borrow' , date_return = '$date_return' WHERE ID = $id ";
     if ($conn->query($sql) !== FALSE) {
-        header("Location: user.php");
+        $sql = "UPDATE call_card SET name_book_id = $name_book_id, user_id = $user_id, staff_id = $staff_id, date_borrow = $date_borrow , date_return = $date_return WHERE ID = $id ";
+        $Time = date('Y-m-d H:i:s');
+        $home = "INSERT INTO home(TableChange,Record,Time) VALUES('call_card','$sql','$Time')";
+        $mysql = $conn->query($home);
+        header("Location: call_card.php");
     } else {
         echo "Error: <br>" . $sql . "<br>Please contact admin to fix problem";
 }

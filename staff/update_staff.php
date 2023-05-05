@@ -14,7 +14,14 @@
         $date_of_start = $_POST['date_of_start'];
         $slary = $_POST['slary'];
         $sql = "UPDATE staff SET name_staff = '$name_staff', date_of_birth = '$date_of_birth', date_of_start = '$date_of_start', slary = '$slary' WHERE ID = $id ";
+
+        
+
         if ($conn->query($sql) !== FALSE) {
+            $sql = "UPDATE staff SET name_staff = $name_staff, date_of_birth = $date_of_birth, date_of_start = $date_of_start, slary = $slary WHERE ID = $id ";
+            $Time = date('Y-m-d H:i:s');
+            $home = "INSERT INTO home(TableChange,Record,Time) VALUES('staff','$sql','$Time')";
+            $mysql = $conn->query($home);
             header("Location: staff.php");
         } else {
             echo "Error: <br>" . $sql . "<br>Please contact admin to fix problem";

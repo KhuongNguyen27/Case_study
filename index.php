@@ -5,7 +5,10 @@
         <?php include 'include/sidebar.php'?>
         <div id="content-wrapper" class="d-flex flex-column">
             <div id="content">
-                <?php include_once 'include/nav.php';?>
+                <?php 
+                include_once 'include/nav.php';
+                include_once 'table.php';
+                ?>
             </div>
             <?php include_once 'include/footer.php'?>
         </div>

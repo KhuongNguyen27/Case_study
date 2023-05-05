@@ -65,7 +65,7 @@
                             <a href = "update_call_card.php?Id=<?php echo $r['ID'];?>" >Edit</a>
                         </td>
                         <td>
-                        <a onclick = "return confirm('Are you sure?')"; href="../delete.php?Id=<?php echo $r['ID'];?>">Delete</a>
+                        <a onclick = "return confirm('Are you sure?')"; href="../process/delete.php?Id=<?php echo $r['ID'];?>&file=call_card">Delete</a>
                         </td>
                     </tr>
                     <?php endforeach; ?>

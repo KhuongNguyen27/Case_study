@@ -1,6 +1,6 @@
 <?php 
-    include_once 'include/header.php';
-    include_once 'db.php';
+    include_once '../include_part/header.php';
+    include_once '../db.php';
     global $conn;
     ?>
 <?php
@@ -13,17 +13,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $price = $_GET['price'];
     $sql = "INSERT INTO books (name_book,category_id,author,publication_date,amount,price) VALUES ('$name_book','$category_id','$author','$publication_date','$amount','$price')";
     if ($conn->query($sql) !== FALSE) {
-        header("Location: index.php");
+        $sql = "INSERT INTO books (name_book,category_id,author,publication_date,amount,price) VALUES ($name_book,$category_id,$author,$publication_date,$amount,$price)";
+        $Time = date('Y-m-d H:i:s');
+        $home = "INSERT INTO home(TableChange,Record,Time) VALUES('call_card','$sql','$Time')";
+        $mysql = $conn->query($home);
+        header("Location: books.php");
     } else {
         echo "Error: <br>" . $sql . "<br>Please contact admin to fix problem";
 }
 }
 ?>
 <div id="wrapper">
-        <?php include 'include/sidebar.php'?>
+        <?php include '../include_part/sidebar.php'?>
         <div id="content-wrapper" class="d-flex flex-column">
             <div id="content">
-                <?php include_once 'include/nav.php';?>
+                <?php include_once '../include_part/nav.php';?>
                 <form style = 'margin-left:15px;' action='' method = 'GET'>
                     <div class="mb-3">
                         <label for="formGroupExampleInput" class="form-label">Name</label>
