@@ -57,7 +57,7 @@
 
             <!-- Sidebar Message -->
             <div class="sidebar-card d-none d-lg-flex">
-                <img class="sidebar-card-illustration mb-2" src="../img/undraw_rocket.svg" alt="...">
+                <img class="sidebar-card-illustration mb-2" src="https://img.icons8.com/dusk/100/null/library.png" alt="...">
                 <p class="text-center mb-2"><strong>Fab 5 Library</strong> Fab 5 Library is a program developed and completed by the Fab 5 Team!</p>
                 <a class="btn btn-success btn-sm" href="https://www.facebook.com/profile.php?id=100013306712347">Connect us!</a>
             </div>
